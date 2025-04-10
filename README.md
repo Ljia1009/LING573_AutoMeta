@@ -1,1 +1,1 @@
-# LING573_Summerization_Project
+# LING573_AutoMeta
