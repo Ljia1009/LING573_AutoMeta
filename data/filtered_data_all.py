@@ -12,9 +12,8 @@ with open(file_path, 'r') as f:
         extracted_item = {'Review': [], 'Metareview': ''}
         key_to_contain = ['review', 'rating', 'confidence']
         for review in data['Review']:
-            if 'review' in review:
+            if 'review' in review and 'Metareview' in data:
                 extracted_item['Review'].append(
                     {k: v for k, v in review.items() if k in key_to_contain and k in review})
-            if 'Metareview' in data:
                 extracted_item['Metareview'] = data['Metareview']
         data_list.append(extracted_item)
