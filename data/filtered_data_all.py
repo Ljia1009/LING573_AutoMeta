@@ -9,13 +9,11 @@ with open(file_path, 'r') as f:
         if not line:
             continue
         data = json.loads(line)
-        extracted_item = {'Review': [], 'Metareview': []}
+        extracted_item = {'Review': [], 'Metareview': ''}
         key_to_exclude = ['title']
         for review in data['Review']:
             extracted_item['Review'].append(
                 {k: v for k, v in review.items() if k not in key_to_exclude})
             if 'Metareview' in data:
-                extracted_item['Metareview'].append(data['Metareview'])
+                extracted_item['Metareview'] = data['Metareview']
         data_list.append(extracted_item)
-
-print(data_list[:1])
