@@ -1,14 +1,11 @@
+import sys
 from evaluate import load
 from transformers import pipeline
-from summac.model_summac import SummaCZS, SummaCConv
-from disco_score import DiscoScorer
+#from summac.model_summac import SummaCZS, SummaCConv
+#from disco_score import DiscoScorer
+sys.path.insert(0,"baseline")
+from bart import output, gold_metareview
 
-# bertscore
-bertscore = load("bertscore")
-predictions = ["hello world", "general kenobi"]
-references = ["goodnight moon", "the sun is shining"]
-results = bertscore.compute(predictions=predictions, references=references, model_type="distilbert-base-uncased")
-print(results)
 
 class Evaluator:
     def __init__(self, predictions, references):
@@ -19,7 +16,7 @@ class Evaluator:
         rouge=load('rouge')
         return rouge.compute(predictions=self.predictions,
                          references=self.references,
-                         rouge_types=['rouge_L'],
+                         rouge_types=['rougeL'],
                          use_aggregator=False)
     
     def _bertscore(self, model_type):
@@ -65,9 +62,36 @@ class Evaluator:
             print(disco_scorer.DS_Focus_NN(s, refs)) # FocusDiff 
             print(disco_scorer.DS_SENT_NN(s, refs)) # SentGraph
 
-    def evaluate(self, metric, model_type):
-        if metric == "rougeL":
+    def evaluate(self, metric, **kwargs):
+        if metric == "rouge_L":
             return self._rouge()
         elif metric == "bertscore":
-            return self._bertscore
+            return self._bertscore(model_type=kwargs.get("model_type", "distilbert-base-uncased"))
+        elif metric == "factCC":
+            return self._factCC(
+                source_docs=kwargs["source_docs"],
+                summaries=kwargs["summaries"],
+            )
+        elif metric == "summaC":
+            return self._summaC(
+                source_docs=kwargs["source_docs"],
+                summaries=kwargs["summaries"],
+            )
+        elif metric == "disco":
+            return self._discoScore(
+                system=kwargs["system"],
+                references=kwargs["references"],
+            )
+        else:
+            raise ValueError(f"Unknown metric: {metric}")
+if __name__ == "__main__":
+    # preds = ["hello world", "general kenobi"]
+    # refs  = ["goodnight moon", "the sun is shining"]
 
+    ev = Evaluator(output, gold_metareview)
+
+    rouge_scores = ev.evaluate("rouge_L")
+    print("ROUGE:", rouge_scores)
+
+    bert_results = ev.evaluate("bertscore", model_type="distilbert-base-uncased")
+    print("BERTScore:", bert_results)
