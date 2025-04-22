@@ -1,5 +1,5 @@
 from transformers import pipeline
-from flitered_data_review_only import data_list
+from data.flitered_data_review_only import data_list
 
 
 output = []
