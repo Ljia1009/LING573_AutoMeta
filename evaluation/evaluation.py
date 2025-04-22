@@ -1,7 +1,11 @@
+import sys
 from evaluate import load
 from transformers import pipeline
-from summac.model_summac import SummaCZS, SummaCConv
-from disco_score import DiscoScorer
+#from summac.model_summac import SummaCZS, SummaCConv
+#from disco_score import DiscoScorer
+sys.path.insert(0,"baseline")
+from bart import output, gold_metareview
+
 
 class Evaluator:
     def __init__(self, predictions, references):
@@ -81,10 +85,10 @@ class Evaluator:
         else:
             raise ValueError(f"Unknown metric: {metric}")
 if __name__ == "__main__":
-    preds = ["hello world", "general kenobi"]
-    refs  = ["goodnight moon", "the sun is shining"]
+    # preds = ["hello world", "general kenobi"]
+    # refs  = ["goodnight moon", "the sun is shining"]
 
-    ev = Evaluator(preds, refs)
+    ev = Evaluator(output, gold_metareview)
 
     rouge_scores = ev.evaluate("rouge_L")
     print("ROUGE:", rouge_scores)
