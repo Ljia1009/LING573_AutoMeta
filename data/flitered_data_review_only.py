@@ -1,6 +1,6 @@
 import json
 
-file_path = 'ORSUM_train.jsonl'
+file_path = "/Users/xinyiliu/Desktop/Code_Test/LING573_AutoMeta/baseline/data/ORSUM_test.jsonl"
 data_list = []
 
 with open(file_path, 'r') as f:
