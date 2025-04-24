@@ -16,8 +16,8 @@ Arguments:
 --key_option:   Option for the keys extracted from each review;
                 Valid options are review, all.
                 default="review"
---model:        Model uased for summarization;
-                valid options are bart, ...
+--model:        Model used for summarization;
+                valid options are bart, ...TBD
                 default="bart"
 --sample_size:  Number of samples to run summarization for;
                 default to dataset length.
