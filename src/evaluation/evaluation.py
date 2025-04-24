@@ -3,7 +3,7 @@ from evaluate import load
 from transformers import pipeline
 #from summac.model_summac import SummaCZS, SummaCConv
 #from disco_score import DiscoScorer
-sys.path.insert(0,"baseline")
+sys.path.insert(0,"src/models/baseline")
 from bart import output, gold_metareview
 
 
