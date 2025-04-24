@@ -6,11 +6,17 @@ Command for running summarization:
 python src/run_summarization.py
 ```
 Arguments:
-```
---data_path:  default=""  Full path of the file used for testing.
---data_option:  default="dev"  Option for the file used for testing, ignored when full path is provided. Valid options are dev, test, or train
---key_option:  default="review" Option for the keys extracted from each review. Valid options are review, all.
---model:  default="bart"  Model uased for summarization. Valid options are bart, ...
---sample_size:  default=0  Number of samples to run summarization for, default to dataset length.
---output_path:  default="summarization_output.txt"  Path to save the output.
+```bash
+--data_path:    Full path of the file used for testing.
+                default=""
+--data_option:  Option for the file used for testing, ignored when full path is provided. Valid options are dev, test, or train
+                default="dev"
+--key_option:   Option for the keys extracted from each review. Valid options are review, all.
+                default="review"
+--model:        Model uased for summarization. Valid options are bart, ...
+                default="bart"
+--sample_size:  Number of samples to run summarization for, default to dataset length.
+                default=0
+--output_path:  Path to save the output.
+                default="summarization_output.txt"
 ```
