@@ -6,7 +6,7 @@ Command for running summarization:
 python src/run_summarization.py
 ```
 Arguments:
-```bash
+```
 --data_path:  default=""  Full path of the file used for testing.
 --data_option:  default="dev"  Option for the file used for testing, ignored when full path is provided. Valid options are dev, test, or train
 --key_option:  default="review" Option for the keys extracted from each review. Valid options are review, all.
