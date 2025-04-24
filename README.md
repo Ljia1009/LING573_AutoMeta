@@ -6,7 +6,7 @@ Command for running summarization from the env root:
 python src/run_summarization.py
 ```
 Arguments:
-```bash
+```
 --data_path:    Full path of the file used for testing.
                 default=""
 --data_option:  Option for the file used for testing;
