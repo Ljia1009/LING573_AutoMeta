@@ -1,4 +1,4 @@
-# Requires Python 3.9
+# Requires Python 3.10
 bert_score==0.3.13
 evaluate==0.4.3
 huggingface_hub==0.30.2
