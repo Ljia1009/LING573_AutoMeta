@@ -1,6 +1,6 @@
 import utils
 from data.load_data import load_data_from_json
-from models.baseline import bart
+from models.baseline import bart,pegasus,flan_t5, olmo, DistilBart,pegasus_x
 
 if __name__ == "__main__":
     args = utils.get_args()
@@ -8,6 +8,16 @@ if __name__ == "__main__":
     data_list = load_data_from_json(args.data_path, args.data_option, args.key_option)
     if args.model == 'bart':
         output, gold_metareview = bart.run_bart_summarization(args.sample_size, data_list)
+    elif args.model == 'pegasus':
+        output, gold_metareview = pegasus.run_pegasus_summarization(args.sample_size, data_list)
+    # elif args.model == 'pegasus-x':
+    #     output, gold_metareview = pegasus_x.run_pegasus_x_summarization(args.sample_size, data_list)
+    elif args.model == 'flan-t5':
+        output, gold_metareview = flan_t5.run_flan_t5_summarization(args.sample_size, data_list)
+    elif args.model == 'DistilBart':
+        output, gold_metareview = DistilBart.run_distilbart_summarization(args.sample_size, data_list)
+    elif args.model == 'olmo':
+        output, gold_metareview = olmo.run_olmo_summarization(args.sample_size, data_list)
     
     if output is None or gold_metareview is None:
         print("No output or gold meta-review generated.")
