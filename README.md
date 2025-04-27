@@ -22,5 +22,5 @@ Arguments:
                 valid options are bart, ...TBD
                 default="bart"
 --output_path:  Path to save the output.
-                default="summarization_output.txt"
+                If not specified, it will default to output/<model>_<key_option>_<sample_size_str>_output.txt
 ```
