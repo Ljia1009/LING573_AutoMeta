@@ -39,7 +39,7 @@ def run_flan_t5_summarization(sample_size: int, data_list: list):
     for paper in data_list[:sample_size]:
         result = 'Below are multiple summaries of a paper\'s reviews. '
         for review in paper['ReviewList']:
-            tokens = tokenizer.encode(review, truncation=True, max_length=1024)
+            tokens = tokenizer.encode(review, truncation=True, max_length=512)
             # if len(tokens) > max_input_tokens:
             #     tokens = tokens[:max_input_tokens-1]
             #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
@@ -56,7 +56,7 @@ def run_flan_t5_summarization(sample_size: int, data_list: list):
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         # else:
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
-        tokens = tokenizer.encode(result, truncation=True, max_length=1024)
+        tokens = tokenizer.encode(result, truncation=True, max_length=512)
         text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         final = summarizer(text_to_summary,
                            min_length=90, do_sample=False)
