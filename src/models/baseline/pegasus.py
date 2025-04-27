@@ -12,10 +12,11 @@ def run_pegasus_summarization(sample_size: int, data_list: list):
         sample_size = len(data_list)
     for review in data_list[:sample_size]:
         gold_metareview.append(review['Metareview'])
-    result = 'Below are multiple summaries of a paper\'s reviews. '
+    # result = 'Below are multiple summaries of a paper\'s reviews. '
     # if not sample_size:
     #     sample_size = len(data_list)
     for paper in data_list[:sample_size]:
+        result = 'Below are multiple summaries of a paper\'s reviews. '
         for review in paper['ReviewList']:
             inputs = tokenizer(review,
                                max_length=500, return_tensors="pt")
