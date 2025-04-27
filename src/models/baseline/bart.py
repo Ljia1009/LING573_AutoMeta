@@ -38,7 +38,7 @@ def run_bart_summarization(sample_size: int, data_list: list):
     #     sample_size = len(data_list)
     for paper in data_list[:sample_size]:
         for review in paper['ReviewList']:
-            tokens = tokenizer.encode(review, truncation=True, max_length=500)
+            tokens = tokenizer.encode(review, truncation=True, max_length=1024)
             # if len(tokens) > max_input_tokens:
             #     tokens = tokens[:max_input_tokens-1]
             #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
@@ -55,7 +55,7 @@ def run_bart_summarization(sample_size: int, data_list: list):
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         # else:
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
-        tokens = tokenizer.encode(result, truncation=True, max_length=500)
+        tokens = tokenizer.encode(result, truncation=True, max_length=1024)
         text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         final = summarizer(text_to_summary,
                            min_length=90, do_sample=False)
