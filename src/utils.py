@@ -35,8 +35,8 @@ def get_args() -> argparse.Namespace:
     parser.add_argument(
         "--output_path",
         type=str,
-        default="summarization_output.txt",
-        help="Path to save the output.",
+        default="",
+        help="Full path to save the output; if not provided, the output will be saved in the output/ directory with model options in the name.",
     )
     args = parser.parse_args()
     return args
