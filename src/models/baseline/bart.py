@@ -2,7 +2,9 @@ from transformers import pipeline
 from transformers import AutoModelForSeq2SeqLM
 from transformers import AutoTokenizer
 import torch
-def run_bart_summarization(sample_size:int, data_list:list):
+
+
+def run_bart_summarization(sample_size: int, data_list: list):
     """
     Run the summarization process with BART.
     """
@@ -10,7 +12,7 @@ def run_bart_summarization(sample_size:int, data_list:list):
 
     # Initialize the output list and gold metareview list
 
-    device_id = 0 if torch.cuda.is_available() else -1
+    # device_id = 0 if torch.cuda.is_available() else -1
 
     output = []
     gold_metareview = []
@@ -18,28 +20,32 @@ def run_bart_summarization(sample_size:int, data_list:list):
     model = AutoModelForSeq2SeqLM.from_pretrained("facebook/bart-large-cnn")
     tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-cnn")
     # max_input_tokens = model.config.max_position_embeddings
+    if not sample_size:
+        sample_size = len(data_list)
 
     # Extract the gold metareview from the first specified reviews
     for review in data_list[:sample_size]:
         gold_metareview.append(review['Metareview'])
 
     # Initialize the summarizer pipeline
-    summarizer = pipeline("summarization", model="facebook/bart-large-cnn",device=device_id)
+    summarizer = pipeline(
+        "summarization", model="facebook/bart-large-cnn")
 
     # Prepare the result string
     result = 'Below are multiple summaries of a paper\'s reviews. '
     # Iterate through each paper and its reviews to generate summaries
-    if not sample_size:
-        sample_size = len(data_list)
+    # if not sample_size:
+    #     sample_size = len(data_list)
     for paper in data_list[:sample_size]:
         for review in paper['ReviewList']:
-            tokens = tokenizer.encode(review, truncation=True,max_length=900)
+            tokens = tokenizer.encode(review, truncation=True, max_length=500)
             # if len(tokens) > max_input_tokens:
             #     tokens = tokens[:max_input_tokens-1]
             #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
             # else:
             #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
-            text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
+            text_to_summary = tokenizer.decode(
+                tokens, skip_special_tokens=True)
             summary = summarizer(text_to_summary,
                                  min_length=40, do_sample=False)
             result += summary[0]['summary_text']+'\n'
@@ -49,7 +55,7 @@ def run_bart_summarization(sample_size:int, data_list:list):
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         # else:
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
-        tokens = tokenizer.encode(result, truncation = True,max_length=900)
+        tokens = tokenizer.encode(result, truncation=True, max_length=500)
         text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         final = summarizer(text_to_summary,
                            min_length=90, do_sample=False)
