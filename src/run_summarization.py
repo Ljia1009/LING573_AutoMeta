@@ -23,6 +23,14 @@ if __name__ == "__main__":
         print("No output or gold meta-review generated.")
         exit(1)
     
+    if not args.output_path:
+        if not args.sample_size:
+            sample_size_str = "full"
+        else:
+            sample_size_str = str(args.sample_size)
+        # If no output path is provided, save to the default output directory
+        args.output_path = f"output/{args.model}_{args.key_option}_{sample_size_str}_output.txt"
+
     with open(args.output_path, 'w') as f:
         for i in range(len(output)):
             f.write(f"Generated Summary {i+1}:\n")
