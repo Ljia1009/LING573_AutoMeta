@@ -32,11 +32,12 @@ def run_flan_t5_summarization(sample_size: int, data_list: list):
         "summarization", model="google/flan-t5-base")
 
     # Prepare the result string
-    result = 'Below are multiple summaries of a paper\'s reviews. '
+    # result = 'Below are multiple summaries of a paper\'s reviews. '
     # Iterate through each paper and its reviews to generate summaries
     # if not sample_size:
     #     sample_size = len(data_list)
     for paper in data_list[:sample_size]:
+        result = 'Below are multiple summaries of a paper\'s reviews. '
         for review in paper['ReviewList']:
             tokens = tokenizer.encode(review, truncation=True, max_length=1024)
             # if len(tokens) > max_input_tokens:
