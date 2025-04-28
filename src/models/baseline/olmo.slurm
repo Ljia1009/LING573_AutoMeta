@@ -7,9 +7,9 @@
 #SBATCH --account=stf
 #SBATCH --partition=gpu-2080ti
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=32
+#SBATCH --ntasks-per-node=16
 #SBATCH --mem=64G
-#SBATCH --gpus=2
+#SBATCH --gpus=1
 #SBATCH --time=00-12:00:00 # Max runtime in DD-HH:MM:SS format.
 
 #SBATCH --export=all
