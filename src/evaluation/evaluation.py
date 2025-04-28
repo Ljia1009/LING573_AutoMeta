@@ -48,7 +48,7 @@ class Evaluator:
     def _summaC(self, reviews:list[list[str]], meta_reviews:list[str]) -> list[float]:
         # TODO: SummaC:https://github.com/tingofurro/summac
         # model_zs = SummaCZS(granularity="sentence", model_name="vitc", device="cpu") # If you have a GPU: switch to: device="cuda"
-        from summac.model_summac import SummaCZS, SummaCConv
+        from summac.model_summac import SummaCConv
 
         model_conv = SummaCConv(models=["vitc"], bins='percentile', granularity="sentence", nli_labels="e", device="cpu", start_file="default", agg="mean")
         concatenated_reviews = [' '.join(review_list) for review_list in reviews]

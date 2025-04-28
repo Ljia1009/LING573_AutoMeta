@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import argparse
 
+# convert the model output from txt to json
 def load_output_from_txt(file_path:str):
     with open(file_path, "r") as file:
         text = ''.join(file.readlines())
