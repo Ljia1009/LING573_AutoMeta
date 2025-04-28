@@ -1,6 +1,6 @@
 import utils
 from data.load_data import load_data_from_json
-from models.baseline import bart, pegasus, flan_t5, olmo, DistilBart, pegasus_x
+from models.baseline import bart, pegasus, flan_t5, olmo, DistilBart
 
 if __name__ == "__main__":
     args = utils.get_args()
