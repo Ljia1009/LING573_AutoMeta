@@ -21,6 +21,6 @@ module load cuda
 # Your programs to run.
 eval "$(/gscratch/stf/jiamu/gscratch/stf/jiamu/miniconda3/bin/conda shell.bash hook)"
 conda activate ling573
-python3 /gscratch/stf/jiamu/LING573_AutoMeta/src/run_summarization.py --data_path /gscratch/stf/jiamu/LING573_AutoMeta/data/ORSUM_test.jsonl --key_option review --model bart --output_path /gscratch/stf/jiamu/LING573_AutoMeta/src/models/baseline/bart_review_out.txt
-python3 /gscratch/stf/jiamu/LING573_AutoMeta/src/run_summarization.py --data_path /gscratch/stf/jiamu/LING573_AutoMeta/data/ORSUM_test.jsonl --key_option all --model bart --output_path /gscratch/stf/jiamu/LING573_AutoMeta/src/models/baseline/bart_all_out.txt
+/gscratch/stf/jiamu/gscratch/stf/jiamu/miniconda3/envs/ling573/bin/python3 /gscratch/stf/jiamu/LING573_AutoMeta/src/run_summarization.py --data_path /gscratch/stf/jiamu/LING573_AutoMeta/data/ORSUM_test.jsonl --key_option review --model bart --output_path /gscratch/stf/jiamu/LING573_AutoMeta/output/bart_review_out.txt
+/gscratch/stf/jiamu/gscratch/stf/jiamu/miniconda3/envs/ling573/bin/python3 /gscratch/stf/jiamu/LING573_AutoMeta/src/run_summarization.py --data_path /gscratch/stf/jiamu/LING573_AutoMeta/data/ORSUM_test.jsonl --key_option all --model bart --output_path /gscratch/stf/jiamu/LING573_AutoMeta/output/bart_all_out.txt
 conda deactivate
