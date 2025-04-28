@@ -24,3 +24,32 @@ Arguments:
 --output_path:  Path to save the output.
                 When unspecified, default to output/<model>_<key_option>_<sample_size>_output.txt
 ```
+
+## Evaluation
+run
+```
+./run_evaluation.sh
+```
+to run evaluation using rougeL, bertscore, and factCC metrics;
+
+run 
+```
+./run_evaluation_disco.sh
+```
+to run evaluation using disco metrics;
+
+run 
+```
+./run_evaluation_summac.sh
+```
+to run evaluation using summac metrics;
+
+The evaluation results are save as csv files under `./evaluation` with the same of "{metric}_{model}_{key_option}_out.txt.csv"
+
+### Environment Issue
+The environment required by summac package is different from the rest of others.
+To run this, you'll have to have one separate environment.
+
+### Metrics issues
+"DS_Focus_NN" and "DS_SENT_NN" require using BERT model that has a limit for input length(512).
+It seems that some of our inputs are longer than the limits. So at this moment the two are not includede.
