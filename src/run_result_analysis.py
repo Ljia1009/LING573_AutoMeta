@@ -26,5 +26,5 @@ comparison_df = pd.DataFrame(model_results).T
 
 
 comparison_df = comparison_df.sort_values(by="BERTScore-F1-Avg", ascending=False)
-
+comparison_df = comparison_df.round(4)
 comparison_df.to_csv("../evaluation/evaluation_summary.csv", index=True)
