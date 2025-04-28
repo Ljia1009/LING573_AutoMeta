@@ -1,5 +1,9 @@
 import pandas as pd
 import glob
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt') 
+
 
 file_paths = glob.glob("../evaluation/metrics/*.csv")
 model_results = {}
@@ -8,6 +12,7 @@ for file_path in file_paths:
     model_name = file_path.split("/")[-1].replace(".txt.csv", "")
     df = pd.read_csv(file_path)
 
+    df['prediction_tokens'] = df['prediction'].apply(lambda x: len(word_tokenize(str(x))))
 
     results = {
         "ROUGE-Avg": df['rouge_score'].mean(),
@@ -17,6 +22,7 @@ for file_path in file_paths:
         "FactCC-Score-Avg": df['factCC_score'].mean(),
         "FactCC-Score-Std": df['factCC_score'].std(),
         "FactCC-Label-Consistency-Rate": (df['factCC_label'] == 'CORRECT').mean(),
+        "Avg-Prediction-Tokens": df['prediction_tokens'].mean(),
     }
 
     model_results[model_name] = results
