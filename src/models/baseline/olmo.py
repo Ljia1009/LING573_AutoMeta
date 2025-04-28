@@ -13,7 +13,7 @@ def run_olmo_summarization(sample_size: int, data_list: list):
         gold_metareview.append(review['Metareview'])
 
     summarizer = pipeline(
-        "text-generation", model="allenai/OLMo-2-1124-7B-SFT", device=device_id,trust_remote_code=True)
+        "text-generation", model="allenai/OLMo-2-1124-7B-SFT", device=device_id, trust_remote_code=True)
 
     # result = 'Below are multiple summaries of a paper\'s reviews. You need to summarize them. \n'
     for paper in data_list[:sample_size]:
@@ -24,5 +24,5 @@ def run_olmo_summarization(sample_size: int, data_list: list):
             result += summary[0]['generated_text']+'\n'
         final = summarizer(result, max_new_tokens=200,
                            min_length=90, do_sample=False)
-        output.append(final[0]['summary_text'])
+        output.append(final[0]['generated_text'])
     return output, gold_metareview
