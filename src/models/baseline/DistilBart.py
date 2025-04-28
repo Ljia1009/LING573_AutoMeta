@@ -4,7 +4,7 @@ from transformers import AutoTokenizer
 import torch
 
 
-def run_bart_summarization(sample_size: int, data_list: list):
+def run_distilbart_summarization(sample_size: int, data_list: list):
     """
     Run the summarization process with BART.
     """
@@ -17,8 +17,9 @@ def run_bart_summarization(sample_size: int, data_list: list):
     output = []
     gold_metareview = []
 
-    model = AutoModelForSeq2SeqLM.from_pretrained("facebook/bart-large-cnn")
-    tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-cnn",model_max_length = 1024)
+    model = AutoModelForSeq2SeqLM.from_pretrained(
+        "sshleifer/distilbart-cnn-12-6")
+    tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6",model_max_length = 1024)
     # max_input_tokens = model.config.max_position_embeddings
     if not sample_size:
         sample_size = len(data_list)
@@ -29,7 +30,7 @@ def run_bart_summarization(sample_size: int, data_list: list):
 
     # Initialize the summarizer pipeline
     summarizer = pipeline(
-        "summarization", model="facebook/bart-large-cnn")
+        "summarization", model="sshleifer/distilbart-cnn-12-6")
 
     # Prepare the result string
     # result = 'Below are multiple summaries of a paper\'s reviews. '
@@ -56,7 +57,7 @@ def run_bart_summarization(sample_size: int, data_list: list):
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         # else:
         #     text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
-        tokens = tokenizer.encode(result, truncation='longest_first',max_length=1020)
+        tokens = tokenizer.encode(result, truncation='longest_first', max_length=1020)
         text_to_summary = tokenizer.decode(tokens, skip_special_tokens=True)
         final = summarizer(text_to_summary,
                            min_length=90, do_sample=False)
