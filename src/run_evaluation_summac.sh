@@ -1,7 +1,30 @@
-#!/bin/sh
-DATA_PATH="/Users/chenxinliu/LING573_AutoMeta/data/ORSUM_test.jsonl"
-KEY_OPTION="all"
-OUTPUT_PATH="/Users/chenxinliu/LING573_AutoMeta/output/bart_all_out.json"
-EVAL_PATH="/Users/chenxinliu/LING573_AutoMeta/evaluation/bart_all_out_summac.csv"
+#!/bin/bash
 
-python run_evaluation_summac.py --data_path $DATA_PATH --key_option $KEY_OPTION --output_path $OUTPUT_PATH --evaluation_result_path $EVAL_PATH
+DATA_PATH="/Users/chenxinliu/LING573_AutoMeta/data/ORSUM_test.jsonl"
+OUTPUT_DIR="/Users/chenxinliu/LING573_AutoMeta/output"
+EVAL_DIR="/Users/chenxinliu/LING573_AutoMeta/evaluation"
+
+
+for OUTPUT_PATH in "$OUTPUT_DIR"/*_out.txt.json; do
+    BASENAME=$(basename "$OUTPUT_PATH" .json)    
+    SUFFIX="${BASENAME#_out.txt}"  
+
+    EVAL_PATH="$EVAL_DIR/summac_${BASENAME}.csv"
+
+    KEY_OPTION="all"
+
+    echo "=== handling $OUTPUT_PATH ==="
+    python run_evaluation_summac.py \
+        --data_path "$DATA_PATH" \
+        --key_option "$KEY_OPTION" \
+        --output_path "$OUTPUT_PATH" \
+        --evaluation_result_path "$EVAL_PATH"
+    
+    KEY_OPTION="review"
+
+    python run_evaluation_summac.py \
+        --data_path "$DATA_PATH" \
+        --key_option "$KEY_OPTION" \
+        --output_path "$OUTPUT_PATH" \
+        --evaluation_result_path "$EVAL_PATH"
+done
