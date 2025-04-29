@@ -35,7 +35,7 @@ if __name__ == "__main__":
         else:
             sample_size_str = str(args.sample_size)
         # If no output path is provided, save to the default output directory
-        args.output_path = f"output/{args.model}_{args.key_option}_{sample_size_str}_output.txt"
+        args.output_path = f"output/{args.model}_{args.key_option}_{sample_size_str}_out.txt"
 
     with open(args.output_path, 'w') as f:
         for i in range(len(output)):
