@@ -21,6 +21,8 @@ for file_path in regular_files:
         'Prediction-Tokens-Length': df['prediction_tokens'].mean(),
         'ROUGE': df['rouge_score'].mean(),
         'BERTScore-F1': df['bertscore_f1'].mean(),
+        'BERTScore-precision': df['bertscore_precision'].mean(),
+        'BERTScore-recall': df['bertscore_recall'].mean(),
         'FactCC-Score': df['factCC_score'].mean(),
         'FactCC-Label-Rate': (df['factCC_label'] == 'CORRECT').mean(),
     }
