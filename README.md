@@ -1,6 +1,7 @@
 # LING573_AutoMeta
 For full original and training dataset, visit https://drive.google.com/drive/folders/14CXIUZWwPkoUQxVDcN8NLVOaYjwcPc-q?usp=drive_link
 
+## Summarization
 Command for running summarization from the repo root:
 ```bash
 python src/run_summarization.py
@@ -26,25 +27,22 @@ Arguments:
 ```
 
 ## Evaluation
-run
-```
+Run evaluation using rougeL, bertscore, and factCC metrics:
+```bash
 ./run_evaluation.sh
 ```
-to run evaluation using rougeL, bertscore, and factCC metrics;
 
-run 
-```
+Run evaluation using disco metrics:
+```bash
 ./run_evaluation_disco.sh
 ```
-to run evaluation using disco metrics;
 
-run 
+Run evaluation using summac metrics: 
 ```
 ./run_evaluation_summac.sh
 ```
-to run evaluation using summac metrics;
 
-The evaluation results are save as csv files under `./evaluation` with the same of "{metric}_{model}_{key_option}_out.txt.csv"
+The evaluation results are save as csv files under `./evaluation` as `<metric>_<model>_<key_option>_out.txt.csv`
 
 ### Environment Issue
 The environment required by summac package is different from the rest of others.
