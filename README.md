@@ -27,14 +27,14 @@ Arguments:
 ```
 
 ## Evaluation
-Run evaluation using rougeL, bertscore, and factCC metrics:
+Run evaluation using rougeL, bertscore, and factCC metrics from the repo root:
 ```bash
-./run_evaluation.sh
+src/run_evaluation.sh
 ```
 
-Run evaluation using disco metrics:
+Run evaluation using disco metrics from the repo root:
 ```bash
-./run_evaluation_disco.sh
+src/run_evaluation_disco.sh
 ```
 
 The evaluation results are save as csv files under `./evaluation` as `<metric>_<model>_<key_option>_out.txt.csv`
