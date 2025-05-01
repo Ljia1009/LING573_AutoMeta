@@ -37,17 +37,4 @@ Run evaluation using disco metrics:
 ./run_evaluation_disco.sh
 ```
 
-Run evaluation using summac metrics: 
-```
-./run_evaluation_summac.sh
-```
-
 The evaluation results are save as csv files under `./evaluation` as `<metric>_<model>_<key_option>_out.txt.csv`
-
-### Environment Issue
-The environment required by summac package is different from the rest of others.
-To run this, you'll have to have one separate environment.
-
-### Metrics issues
-"DS_Focus_NN" and "DS_SENT_NN" require using BERT model that has a limit for input length(512).
-It seems that some of our inputs are longer than the limits. So at this moment the two are not includede.
