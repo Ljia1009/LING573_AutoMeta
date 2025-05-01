@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DATA_PATH="/Users/chenxinliu/LING573_AutoMeta/data/ORSUM_test.jsonl"
-OUTPUT_DIR="/Users/chenxinliu/LING573_AutoMeta/output"
-EVAL_DIR="/Users/chenxinliu/LING573_AutoMeta/evaluation"
+DATA_PATH="data/ORSUM_test.jsonl"
+OUTPUT_DIR="output"
+EVAL_DIR="evaluation"
 
 
 for OUTPUT_PATH in "$OUTPUT_DIR"/*_out.txt.json; do

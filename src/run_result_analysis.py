@@ -5,7 +5,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 
-file_paths = glob.glob("../evaluation/*.csv")
+file_paths = glob.glob("evaluation/*.csv")
 
 regular_files = [fp for fp in file_paths if not os.path.basename(fp).startswith('disco')]
 main_metrics = []
@@ -54,6 +54,6 @@ df_merged = pd.merge(df_main_metrics, df_disco_metrics, on='model', how='outer')
 df_merged = df_merged.round(4)
 
 df_merged = df_merged.sort_values(by="model", ascending=False)
-df_merged.to_csv("../evaluation/analysis/evaluation_summary_combined.csv", index=False)
+df_merged.to_csv("evaluation/analysis/evaluation_summary_combined.csv", index=False)
 
 print(df_merged)
