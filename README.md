@@ -23,7 +23,7 @@ Arguments:
                 Valid options are review, all.
                 default="review"
 --model:        Model used for summarization;
-                valid options are bart, ...TBD
+                valid options are bart, pegasus, flan-t5, DistilBart.
                 default="bart"
 --output_path:  Path to save the output.
                 When unspecified, default to output/<model>_<key_option>_<sample_size>_out.txt
