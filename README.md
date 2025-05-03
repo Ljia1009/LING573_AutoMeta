@@ -1,4 +1,5 @@
 # LING573_AutoMeta
+The dev and test sets are under `data/`.
 For full original and training dataset, visit https://drive.google.com/drive/folders/14CXIUZWwPkoUQxVDcN8NLVOaYjwcPc-q?usp=drive_link
 
 ## Summarization
@@ -27,14 +28,15 @@ Arguments:
 ```
 
 ## Evaluation
-Run evaluation using rougeL, bertscore, and factCC metrics from the repo root:
+The following command runs evaluation using rougeL, bertscore, and factCC metrics from the repo root, for all the output files under `output/`:
 ```bash
 src/run_evaluation.sh
 ```
 
-Run evaluation using disco metrics from the repo root:
+The following command runs evaluation using disco metrics from the repo root, for all the output files under `output/`:
 ```bash
 src/run_evaluation_disco.sh
 ```
 
-The evaluation results are save as csv files under `./evaluation` as `<metric>_<model>_<key_option>_out.txt.csv`
+The evaluation results will be saved as csv files under `evaluation/` as `<metric>_<model>_<key_option>_out.txt.csv`
+
