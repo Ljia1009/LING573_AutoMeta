@@ -1,9 +1,11 @@
 # LING573_AutoMeta
+
+## Data
 The dev and test sets are under `data/`.
 For full original and training dataset, visit https://drive.google.com/drive/folders/14CXIUZWwPkoUQxVDcN8NLVOaYjwcPc-q?usp=drive_link
 
 ## Summarization
-Command for running summarization from the repo root:
+The following command runs summarization from the repo root:
 ```bash
 python src/run_summarization.py
 ```
