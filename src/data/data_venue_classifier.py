@@ -81,7 +81,9 @@ def detect_structured_review(text: str) -> bool:
     """
     patterns = {
         'strength': r'\bstrengths?\b\s*[:\-]',
-        'weakness': r'\blimitations?\b\s*[:\-]|weakness(es)?\b\s*[:\-]'
+        #'weakness': r'\blimitations?\b\s*[:\-]|weakness(es)?\b\s*[:\-]'
+        'weakness': r'\bweakness(es)?\b\s*[:\-]'
+        
     }
 
     found_strength = bool(re.search(patterns['strength'], text, re.IGNORECASE))
@@ -92,25 +94,44 @@ def detect_structured_review(text: str) -> bool:
 def analyze_structured_by_venue(file_option="train"):
     data_by_venue = load_raw_data_grouped_by_venue(None, file_option)
 
-    output = []
+    venue_stats = []
+    total_reviews = 0
+    total_structured = 0
+
     for venue, papers in data_by_venue.items():
-        total_reviews = 0
-        structured_reviews = 0
+        venue_total = 0
+        venue_structured = 0
+
         for paper in papers:
             for review in paper['ReviewList']:
                 review_text = review.get('review', '')
                 if review_text.strip():
-                    total_reviews += 1
+                    venue_total += 1
                     if detect_structured_review(review_text):
-                        structured_reviews += 1
-        proportion = structured_reviews / total_reviews if total_reviews > 0 else 0
-        output.append({
+                        venue_structured += 1
+
+        proportion = venue_structured / venue_total if venue_total > 0 else 0
+
+        total_reviews += venue_total
+        total_structured += venue_structured
+
+        venue_stats.append({
             'Venue': venue,
-            '#Reviews': total_reviews,
-            '#StructuredReviews': structured_reviews,
+            '#Reviews': venue_total,
+            '#StructuredReviews': venue_structured,
             '%Structured': round(proportion * 100, 2)
         })
-    return output
+
+    # Add total summary
+    venue_stats.append({
+        'Venue': 'TOTAL',
+        '#Reviews': total_reviews,
+        '#StructuredReviews': total_structured,
+        '%Structured': round((total_structured / total_reviews) * 100, 2) if total_reviews > 0 else 0
+    })
+
+    return venue_stats
+
 
 results = analyze_structured_by_venue("train")
 df = pd.DataFrame(results)
