@@ -34,11 +34,34 @@ The following command runs evaluation using rougeL, bertscore, and factCC metric
 ```bash
 src/run_evaluation.sh
 ```
+Before running the disco evaluation, do:
+```
+pip install "git+https://github.com/AIPHES/DiscoScore.git"
+```
 
 The following command runs evaluation using disco metrics from the repo root, for all the output files under `output/`:
 ```bash
-src/run_evaluation_disco.sh
+./run_evaluation_disco.sh
 ```
 
-The evaluation results will be saved as csv files under `evaluation/` as `<metric>_<model>_<key_option>_out.txt.csv`
+Before running the summac evaluation, do:
 
+Run evaluation using summac metrics: 
+```
+./run_evaluation_summac.sh
+```
+
+The evaluation results are save as csv files under `./evaluation` as `<metric>_<model>_<key_option>_out.txt.csv`
+
+### Environment Issue
+The environment required by summac package is different from the rest of others.
+To run this, you'll have to have one separate environment.
+
+For summac:
+```
+huggingface-hub<=0.17.0
+```
+
+### Metrics issues
+"DS_Focus_NN" and "DS_SENT_NN" require using BERT model that has a limit for input length(512).
+It seems that some of our inputs are longer than the limits. So at this moment the two are not includede.
